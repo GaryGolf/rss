@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as API from '../api'
 
 interface Props {
+    url: string
     onSubmit(url:string):void
 }
 interface State {}
@@ -21,6 +22,7 @@ export default class Form extends React.Component<Props, State> {
                 onSubmit={e=>e.preventDefault()}>
                 <input
                     ref={element=>this.input=element}
+                    defaultValue={this.props.url}
                     placeholder="url"
                 />
                 <button onClick={this.submitForm.bind(this)}>

@@ -23,15 +23,37 @@ interface State {}
     })
 )
 export default class Main extends React.Component <Props, State> {
-   
+    private url: string
+    private refresh: number
+    private refreshDelay: number 
+    constructor(props:Props){
+        super(props)
+        this.url = 'https://news.rambler.ru/rss/head/'
+        this.refreshDelay =  1000 * 60 * 5
+        this.refreshFeed = this.refreshFeed.bind(this)
+    }
+
+    componentDidMount(){
+        this.refresh = setInterval(this.refreshFeed, this.refreshDelay)
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.refresh)
+    }
+
     onSubmit(url){
-        this.props.actions.feed.fetch(url)
+        this.url = url
+        this.refreshFeed()
+    }
+    refreshFeed(){
+        if(!!this.url) this.props.actions.feed.fetch(this.url)
     }
     render(){
         return (
             <div style={{margin:'20px'}}>
                 <Form
-                    onSubmit={this.onSubmit.bind(this)}
+                    url={this.url}
+                    onSubmit={this.props.actions.feed.fetch}
                 />
             </div>
         )
