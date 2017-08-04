@@ -16,7 +16,7 @@ export default class List extends React.Component<Props, State> {
             </div>
         ))
         return (
-            <div className={styles.container}>
+            <div>
                 {items}
             </div>
         )
