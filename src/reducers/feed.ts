@@ -1,8 +1,11 @@
 import * as Actions from '../constants/actions'
 
-export type FeedState = Array<any>
-    
-export default function menu(state=[], {type, payload}): FeedState {
+const initialState = {
+    feed: null,
+    items: []
+}
+
+export default function menu(state=initialState, {type, payload}): FeedState {
 
     switch(type){
         case Actions.FETCH_RSS_FEED :

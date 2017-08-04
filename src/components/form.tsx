@@ -1,6 +1,9 @@
 import * as React from 'react'
+import * as API from '../api'
 
-interface Props {}
+interface Props {
+    onSubmit(url:string):void
+}
 interface State {}
 
 export default class Form extends React.Component<Props, State> {
@@ -8,7 +11,8 @@ export default class Form extends React.Component<Props, State> {
     private input:HTMLInputElement
 
     submitForm(){
-        console.log(this.input.value)
+        const url = this.input.value
+        this.props.onSubmit(url)
     }
 
     render(){
