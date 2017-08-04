@@ -1,7 +1,7 @@
 
 import { combineReducers, Reducer } from 'redux'
 
-import feed, {FeedState} from './feed'
+import feed from './feed'
 
 export interface RootState {
   feed: FeedState

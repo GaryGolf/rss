@@ -1,8 +1,8 @@
 import * as Actions from '../constants/actions'
-// import * as API from '../api'
+import * as API from '../api'
 
 export interface Interface {
-    fetch(): Action
+    fetch(url:string): Action
 }
 
-export const fetch = () => ({ type: Actions.FETCH_RSS_FEED, payload: null})
+export const fetch = url => ({ type: Actions.FETCH_RSS_FEED, payload: API.fetchRSSFeed(url)})
