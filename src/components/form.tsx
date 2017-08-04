@@ -1,5 +1,5 @@
 import * as React from 'react'
-import * as API from '../api'
+import * as styles from './form.css'
 
 interface Props {
     url: string
@@ -21,6 +21,7 @@ export default class Form extends React.Component<Props, State> {
             <form action=""
                 onSubmit={e=>e.preventDefault()}>
                 <input
+                    className={styles.input}
                     ref={element=>this.input=element}
                     defaultValue={this.props.url}
                     placeholder="url"
