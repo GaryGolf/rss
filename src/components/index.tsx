@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import Form from './form'
+
 
 interface Props {}
 interface State {}
@@ -12,7 +14,7 @@ export default class Main extends React.Component<Props, State> {
 
         return (
             <div style={{margin:'20px'}}>
-               <span>  Hello </span>
+                <Form/>
             </div>
         )
     }
