@@ -1,6 +1,5 @@
 
 import { combineReducers, Reducer } from 'redux'
-
 import feed from './feed'
 
 export interface RootState {

@@ -29,10 +29,12 @@ export default class Main extends React.Component <Props, State> {
     private refresh: number
     private refreshDelay: number 
     private iframe: HTMLIFrameElement
+    private linkIndex: number
     constructor(props:Props){
         super(props)
-        this.url = 'https://news.rambler.ru/rss/head/'
+        this.url = 'https://news.rambler.ru/rss/?updated=other'
         this.refreshDelay =  1000 * 60 * 5
+        this.linkIndex = 0
         this.refreshFeed = this.refreshFeed.bind(this)
     }
 
@@ -44,17 +46,18 @@ export default class Main extends React.Component <Props, State> {
         clearInterval(this.refresh)
     }
 
+    componentWillReceiveProps(nextProps){
+        const {feed, items} = nextProps.feed
+        if(!!items && items.length) this.url = feed.link
+    }
+
     onSubmit(url:string){
         this.url = url
+        this.props.actions.feed.links(url)
         this.refreshFeed()
     }
     refreshFeed(){
         if(!!this.url) this.props.actions.feed.fetch(this.url)
-    }
-
-    onLoadFrame(e){
-        var domNode = ReactDOM.findDOMNode(this.iframe);
-        console.log(this.iframe.childNodes)
     }
 
     render(){
@@ -62,7 +65,7 @@ export default class Main extends React.Component <Props, State> {
             <div style={{margin:'20px'}}>
                 <Form
                     url={this.url}
-                    onSubmit={this.props.actions.feed.fetch}
+                    onSubmit={this.onSubmit.bind(this)}
                 />
                 <List 
                     feed={this.props.feed.items}

@@ -1,1 +1,2 @@
 export const FETCH_RSS_FEED = 'FETCH_RSS_FEED'
+export const FETCH_RSS_LINKS = 'FETCH_RSS_LINKS'
