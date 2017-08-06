@@ -2,9 +2,11 @@
 import { combineReducers, Reducer } from 'redux'
 
 import feed from './feed'
+import links from './links'
 
 export interface RootState {
-  feed: FeedState
+  feed: FeedState,
+  links: Array<string>
 }
 
-export default combineReducers<RootState>({feed})
+export default combineReducers<RootState>({feed, links})

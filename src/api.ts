@@ -12,13 +12,13 @@ export function fetchRSSFeed(url:string){
 }
 
 export function fetchRSSLinks(url:string){
-    const u = url.endsWith('/') ? url : url+'/'
+    const u = url.includes('?')? url.substring(0,url.indexOf('?')): url.endsWith('/')? url:url+'/'
     const options = {
         url: 'https://cors-anywhere.herokuapp.com/'+url,
         method: 'GET',
         crossDomain: true
     }
-    axios(options)
+    return axios(options)
         .then(response => response.data.match(/\bhref="[^"]+"/gi)
             .sort(str=>str.includes('rss')?0:1)
             .slice(0,10)

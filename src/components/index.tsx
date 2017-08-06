@@ -20,7 +20,8 @@ interface State {}
     }),
     dispatch => ({
         actions: {
-            feed: bindActionCreators(Actions.feed as any, dispatch)
+            feed: bindActionCreators(Actions.feed as any, dispatch),
+            links: bindActionCreators(Actions.links as any, dispatch)
         } 
     })
 )
@@ -49,12 +50,10 @@ export default class Main extends React.Component <Props, State> {
         this.refreshFeed()
     }
     refreshFeed(){
-        if(!!this.url) this.props.actions.feed.fetch(this.url)
-    }
-
-    onLoadFrame(e){
-        var domNode = ReactDOM.findDOMNode(this.iframe);
-        console.log(this.iframe.childNodes)
+        if(!!this.url) {
+            this.props.actions.feed.fetch(this.url)
+            this.props.actions.links.fetch(this.url)
+        }
     }
 
     render(){
@@ -62,7 +61,7 @@ export default class Main extends React.Component <Props, State> {
             <div style={{margin:'20px'}}>
                 <Form
                     url={this.url}
-                    onSubmit={this.props.actions.feed.fetch}
+                    onSubmit={this.onSubmit.bind(this)}
                 />
                 <List 
                     feed={this.props.feed.items}
